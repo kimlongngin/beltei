@@ -1,0 +1,92 @@
+{% extends 'product/base.html' %}
+
+{% load i18n %}
+
+{% block title %} Student profiel {% endblock %}
+
+
+
+{% block body %}
+
+	<div style="padding-bottom: 10px;">
+
+		{% if all_student %}
+
+			<h1> {% trans "Student list" %} </h1>
+
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>{% trans "ID" %}</th>
+						<th>{% trans "First Name" %}</th>
+						<th>{% trans "Last Name" %}</th>
+						<th>{% trans "Sex" %}</th>
+						<th>{% trans "Nationality" %}</th>
+						<th>{% trans "Photo" %}</th>
+						<th>{% trans "Certificate" %}</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					
+					{% get_current_language as LANGUAGE_CODE %}
+					{% if LANGUAGE_CODE == 'km' %}
+						{% for student in all_student %}
+							<tr>
+								<td><p>{{ student.student_id }}</p></td>
+								<td><p>{{ student.first_name_kh }}</p></td>
+								<td><p>{{ student.last_name_kh }}</p></td>
+								<td><p>{% trans student.gender %}</p></td>
+								<td><p>{{ student.nationality_kh }}</p></td>
+								<td><img src = "../../../{{ student.image.url }}" style="width:55px; height: 60px;"></td>
+								<td><img src = "../../../{{ student.certificate.url }}" style="width:55px; height: 60px;"></td>
+							</tr>
+						{% endfor %}
+					{% else %}
+						{% for student in all_student %}
+							<tr>
+								<td><p>{{ student.student_id }}</p></td>
+								<td><p>{{ student.first_name_en }}</p></td>
+								<td><p>{{ student.last_name_en }}</p></td>
+								<td><p>{{ student.gender }}</p></td>
+								<td><p>{{ student.nationality_en }}</p></td>
+								<td><img src = "../../../{{ student.image.url }}" style="width:55px; height: 60px;"></td>
+								<td><img src = "../../../{{ student.certificate.url }}" style="width:55px; height: 60px;"></td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</tbody>
+				
+			</table>
+
+			<div class="pagination_index">
+					
+				{% if is_paginated %}
+				<hr>
+					<ul class="pagination" style="margin:0px 0px !important">
+					{% if page_obj.has_previous %}
+					    <li>
+					        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+					    </li>
+					{% endif %}
+					    <li class="">
+					        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+					    </li>
+					{% if page_obj.has_next %}
+					    <li>
+					        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+					    </li>
+					{% endif %}
+					</ul>
+				
+				{% endif %}
+			</div>
+		{% else %}
+			<h1>No student.</h1>
+		{% endif %}
+
+
+	</div>
+	
+{% endblock %}
