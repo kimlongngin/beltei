@@ -1,4 +1,4 @@
-Django==2.1.8
+Django==2.2.10
 django-braces==1.13.0
 django-custom-delete-selected==0.1
 Pillow==6.0.0
