@@ -1,7 +1,7 @@
 Django==2.1.8
 django-braces==1.13.0
 django-custom-delete-selected==0.1
-Pillow==6.0.0
+Pillow==8.2.0
 pytz==2019.1
 reportlab==3.5.26
 simplejson==3.16.0
